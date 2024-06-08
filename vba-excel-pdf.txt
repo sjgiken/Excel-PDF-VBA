@@ -1,0 +1,75 @@
+Sub pdfçÏê¨()
+Dim myPath As String
+Dim FileInt As Long
+Dim SetPath As String
+Dim myFilename As String
+Dim OriginalPath, OriginalPathName As String
+
+On Error Resume Next
+
+
+Application.DisplayAlerts = False
+
+
+myPath = ThisWorkbook.Path
+
+
+
+   FileInt = 0
+
+    SetPath = Dir(myPath & "\" & "*.xls")
+
+OriginalPath = ThisWorkbook.Name
+OriginalPathName = Left(OriginalPath, Len(OriginalPath) - 4)
+
+
+
+    Do While SetPath <> ""
+        FileInt = FileInt + 1
+
+
+
+
+    Workbooks.Open Filename:=ThisWorkbook.Path & "\" & SetPath
+
+
+
+
+     myFilename = Left(SetPath, Len(SetPath) - 4)
+
+
+
+     If myFilename = OriginalPathName Then
+     
+      Exit Sub
+      
+      
+
+      Else
+      
+      End If
+      
+       Debug.Print OriginalPathName
+
+
+     ActiveWorkbook.ExportAsFixedFormat Type:=xlTypePDF, Filename:=ThisWorkbook.Path & "\" & myFilename, OpenAfterPublish:=False
+
+
+    ActiveWorkbook.Close
+
+
+        SetPath = Dir()
+
+
+
+
+
+
+    Loop
+
+
+
+
+Application.DisplayAlerts = True
+
+End Sub
